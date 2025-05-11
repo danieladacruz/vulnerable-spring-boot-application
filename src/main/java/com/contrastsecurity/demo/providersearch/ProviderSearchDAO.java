@@ -14,8 +14,8 @@ public class ProviderSearchDAO {
 
     public List<Object[]> getProvidersInZipCode(String zipCode) {
         EntityManager em = entityManagerFactory.createEntityManager();
-        String q = "select * from PROVIDERS where public_listing is true and zip_code = '" + zipCode + "'";
-        Query query = em.createNativeQuery(q);
+        String q = "select * from PROVIDERS where public_listing is true and zip_code = :parameter0";
+        Query query = em.createNativeQuery(q).setParameter("parameter0", zipCode);
         List<Object[]> results = query.getResultList();
         return results;
     }
